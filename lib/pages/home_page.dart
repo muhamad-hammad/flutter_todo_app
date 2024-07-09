@@ -16,8 +16,7 @@ class _HomePageState extends State<HomePage> {
 
   // list of todo tasks:
   List<List<dynamic>> toDoList = [
-    ["Study", false],
-    ["Sleep", false],
+    
   ];
   //checkbox was tapped
   void checkBoxChanged(bool? value, int index) {
@@ -33,9 +32,21 @@ class _HomePageState extends State<HomePage> {
       builder: (context) {
         return DialogBox(
           controller: _controller,
+          onSave: saveNewtask,
+          onCancel: () => Navigator.of(context).pop(),
+
         );
       },
     );
+  }
+
+  //save new task:
+  void saveNewtask() {
+    setState(() {
+      toDoList.add([_controller.text, false]);
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
   }
 
   @override
@@ -49,7 +60,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            toDoList.add(["", false]);
+            createNewtask();
           });
         },
         child: const Icon(Icons.add),
