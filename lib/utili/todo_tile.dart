@@ -17,7 +17,7 @@ class ToDotile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
       child: Container(
-          padding: EdgeInsets.all(24),
+          padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: Colors.grey[100],
             borderRadius: BorderRadius.circular(12),
@@ -25,13 +25,22 @@ class ToDotile extends StatelessWidget {
           child: Row(
             children: [
               //checkboxx
-              Checkbox(value: taskCompleted, onChanged: onChanged),
+              Checkbox(
+                value: taskCompleted,
+                onChanged: onChanged,
+                activeColor: Colors.grey[900],
+              ),
 
               //text
               Text(
                 taskName,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  decoration: taskCompleted
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none,
+                ),
               )
             ],
           )),
